@@ -1,0 +1,7 @@
+file_format: "1"
+id: kb78
+name: KB78
+type: shield
+requires: [seeed_xiao]
+features:
+  - keys

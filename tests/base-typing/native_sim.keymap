@@ -1,0 +1,19 @@
+// Fn を押さないとき: 文字キー・Delete・スペース
+#include "../../config/kb78.keymap"
+#include <dt-bindings/zmk/kscan_mock.h>
+
+// テスト用の仮のキー読み取り: 1行×79列。列番号 = kb78.keymap のキー番号
+&kscan {
+    rows = <1>;
+    columns = <79>;
+    events = <
+        ZMK_MOCK_PRESS(0,43,10)
+        ZMK_MOCK_RELEASE(0,43,10)
+        ZMK_MOCK_PRESS(0,27,10)
+        ZMK_MOCK_RELEASE(0,27,10)
+        ZMK_MOCK_PRESS(0,70,10)
+        ZMK_MOCK_RELEASE(0,70,10)
+        ZMK_MOCK_PRESS(0,73,10)
+        ZMK_MOCK_RELEASE(0,73,10)
+    >;
+};

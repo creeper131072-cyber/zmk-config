@@ -1,0 +1,17 @@
+# キーマップの図（keymap-drawer/kb78.svg）を作り、リポジトリに追加する
+name: Draw keymap
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/*.keymap"
+      - "boards/shields/**"
+      - ".github/workflows/draw.yml"
+
+jobs:
+  draw:
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
+    permissions:
+      contents: write
+    with:
+      commit_message: "キーマップの図を更新"

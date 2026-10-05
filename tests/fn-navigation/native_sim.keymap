@@ -1,0 +1,23 @@
+// Fn を押しながら: 矢印は Home/End/PageUp/PageDown、Delete は前方削除
+#include "../../config/kb78.keymap"
+#include <dt-bindings/zmk/kscan_mock.h>
+
+// テスト用の仮のキー読み取り: 1行×79列。列番号 = kb78.keymap のキー番号
+&kscan {
+    rows = <1>;
+    columns = <79>;
+    events = <
+        ZMK_MOCK_PRESS(0,74,10)
+        ZMK_MOCK_PRESS(0,75,10)
+        ZMK_MOCK_RELEASE(0,75,10)
+        ZMK_MOCK_PRESS(0,77,10)
+        ZMK_MOCK_RELEASE(0,77,10)
+        ZMK_MOCK_PRESS(0,73,10)
+        ZMK_MOCK_RELEASE(0,73,10)
+        ZMK_MOCK_PRESS(0,76,10)
+        ZMK_MOCK_RELEASE(0,76,10)
+        ZMK_MOCK_PRESS(0,27,10)
+        ZMK_MOCK_RELEASE(0,27,10)
+        ZMK_MOCK_RELEASE(0,74,10)
+    >;
+};

@@ -1,0 +1,23 @@
+// Fn を押さないとき: 上の段は画面の明るさ・Mission Control・音量など（MacBook Air と同じ）
+#include "../../config/kb78.keymap"
+#include <dt-bindings/zmk/kscan_mock.h>
+
+// テスト用の仮のキー読み取り: 1行×79列。列番号 = kb78.keymap のキー番号
+&kscan {
+    rows = <1>;
+    columns = <79>;
+    events = <
+        ZMK_MOCK_PRESS(0,1,10)
+        ZMK_MOCK_RELEASE(0,1,10)
+        ZMK_MOCK_PRESS(0,3,10)
+        ZMK_MOCK_RELEASE(0,3,10)
+        ZMK_MOCK_PRESS(0,4,10)
+        ZMK_MOCK_RELEASE(0,4,10)
+        ZMK_MOCK_PRESS(0,8,10)
+        ZMK_MOCK_RELEASE(0,8,10)
+        ZMK_MOCK_PRESS(0,12,10)
+        ZMK_MOCK_RELEASE(0,12,10)
+        ZMK_MOCK_PRESS(0,13,10)
+        ZMK_MOCK_RELEASE(0,13,10)
+    >;
+};

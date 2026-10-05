@@ -1,0 +1,7 @@
+if SHIELD_KB78
+
+# Bluetoothで見える名前（16文字まで）
+config ZMK_KEYBOARD_NAME
+    default "KB78"
+
+endif

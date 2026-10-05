@@ -1,0 +1,37 @@
+# キーマップのテスト（実機なしで、キーを押したときにパソコンへ送られる信号を確かめる）
+name: Keymap tests
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/zmkfirmware/zmk-build-arm:4.1
+    env:
+      # このリポジトリの zephyr/module.yml と west が取ってくる zephyr/ がぶつからないよう、別の場所に作業場所を作る
+      WS: /tmp/zmk-ws
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Copy config
+        run: mkdir -p "$WS" && cp -R config "$WS/config"
+      - name: Initialize workspace (west init)
+        working-directory: /tmp/zmk-ws
+        run: west init -l config
+      - name: Update modules (west update)
+        working-directory: /tmp/zmk-ws
+        run: west update --fetch-opt=--filter=tree:0
+      - name: Export Zephyr CMake package (west zephyr-export)
+        working-directory: /tmp/zmk-ws
+        run: west zephyr-export
+      - name: Run tests
+        working-directory: /tmp/zmk-ws/zmk/app
+        env:
+          ZMK_BUILD_DIR: ${{ github.workspace }}/build
+        run: ./run-test.sh "${GITHUB_WORKSPACE}/tests"
+      - name: Archive logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-logs
+          path: build/tests/**/*.log

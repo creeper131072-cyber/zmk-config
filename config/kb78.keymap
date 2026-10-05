@@ -1,0 +1,63 @@
+/*
+ * KB78 キーマップ（MacBook Air と同じ配列・Fn の割り当て）
+ *
+ * キー番号（tests/ のテストで使う）
+ *   0 Esc  1〜12 F1〜F12  13 Power
+ *  14 `  15〜24 1〜0  25 -  26 =  27 Delete
+ *  28 Tab  29〜38 Q〜P  39 [  40 ]  41 \
+ *  42 Caps  43〜51 A〜L  52 ;  53 '  54 Return
+ *  55 Shift  56〜62 Z〜M  63 ,  64 .  65 /  66 Shift
+ *  67 Ctrl  68 Opt  69 Cmd  70 Space  71 Cmd  72 Opt  73 ↑
+ *  74 Fn  75 ←  76 ↓  77 →
+ *  78 タッチパッドのクリック
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
+
+#define BASE 0
+#define FN   1
+
+// macOS のショートカット
+#define MISSION_CTRL LC(UP)         // Mission Control
+#define SPOTLIGHT    LG(SPACE)      // Spotlight
+#define LOCK_SCREEN  LC(LG(Q))      // 画面をロック
+#define EMOJI        LC(LG(SPACE))  // 絵文字ビューア（Mac の Fn+E）
+#define FULLSCREEN   LC(LG(F))      // フルスクリーン（Mac の Fn+F）
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            display-name = "Base";
+            bindings = <
+   &kp ESC  &kp C_BRI_DN  &kp C_BRI_UP  &kp MISSION_CTRL  &kp SPOTLIGHT  &kp C_VOICE_COMMAND  &kp F6  &kp C_PREV  &kp C_PP  &kp C_NEXT  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp LOCK_SCREEN
+   &kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS  &kp EQUAL  &kp BSPC
+   &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp LBKT  &kp RBKT  &kp BSLH
+   &kp CAPS  &kp A  &kp S  &kp D  &kp F  &kp G  &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT  &kp RET
+   &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+   &kp LCTRL  &kp LALT  &kp LGUI  &kp SPACE  &kp RGUI  &kp RALT  &kp UP
+   &mo FN  &kp LEFT  &kp DOWN  &kp RIGHT
+   &mkp LCLK
+            >;
+        };
+
+        fn_layer {
+            display-name = "Fn";
+            bindings = <
+   &trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12  &trans
+   &out OUT_TOG  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &trans  &trans  &trans  &bt BT_CLR  &trans  &trans  &kp DEL
+   &trans  &trans  &trans  &kp EMOJI  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &kp FULLSCREEN  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans  &kp PG_UP
+   &trans  &kp HOME  &kp PG_DN  &kp END
+   &trans
+            >;
+        };
+    };
+};
